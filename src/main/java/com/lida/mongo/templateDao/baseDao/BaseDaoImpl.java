@@ -20,15 +20,14 @@ import java.util.List;
 /**
  * Created by John on 2017-2-8.
  */
-public abstract class BaseDaoImpl<T extends Serializable,PK extends Serializable> implements BaseDao<T,PK> {
+public abstract class BaseDaoImpl<T extends Serializable, PK extends Serializable> implements BaseDao<T, PK> {
 
+    private static Logger logger = LoggerFactory.getLogger(BaseDaoImpl.class);
+    protected final Class<T> entityClass;
+    protected final String collectionName;
     @Resource
     protected MongoTemplate mongoTemplate;
 
-    protected final Class<T> entityClass;
-    protected final String collectionName;
-
-    private static Logger logger = LoggerFactory.getLogger(BaseDaoImpl.class);
     /**
      * 用于Dao层子类使用的构造函数. 通过子类的泛型定义取得对象类型
      */
@@ -42,9 +41,6 @@ public abstract class BaseDaoImpl<T extends Serializable,PK extends Serializable
         return mongoTemplate;
     }
 
-    public void setMongoTemplate(MongoTemplate mongoTemplate) {
-        this.mongoTemplate = mongoTemplate;
-    }
 
     /**
      * BaseDaoImpl<T>的构造函数中的 this 指的是子类的实例。
@@ -54,7 +50,6 @@ public abstract class BaseDaoImpl<T extends Serializable,PK extends Serializable
      * 因为泛型的尖括号是可以有多个参数的，所以该方法返回的是一个数组。
      * p[0]（既：t.getActualTypeArguments()[0]）； 获取该数组的第一个值。因为我们知道在该例子中BaseDaoImpl<T>只有一个参数T。所以我们只需要获取第一个值就可以了。
      */
-    @SuppressWarnings("unchecked")
     private Class getSuperClassGenricType(final Class clazz) {
         final int index = 0;
         Type genType = clazz.getGenericSuperclass();
@@ -114,7 +109,7 @@ public abstract class BaseDaoImpl<T extends Serializable,PK extends Serializable
 
     @Override
     public T findById(ObjectId objectId) {
-        return mongoTemplate.findById(objectId,this.entityClass,this.collectionName);
+        return mongoTemplate.findById(objectId, this.entityClass, this.collectionName);
     }
 
     @Override
