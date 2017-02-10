@@ -4,23 +4,9 @@
          version="2.5">
 
     <!--不加这句话的话项目启动默认首页为index，删除index.jsp也行-->
-   <!-- <welcome-file-list>
-        <welcome-file></welcome-file>
-    </welcome-file-list>-->
-
-    <servlet>
-        <servlet-name>springServlet</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <init-param>
-            <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:spring/spring-*.xml</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>springServlet</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
+    <!-- <welcome-file-list>
+         <welcome-file></welcome-file>
+     </welcome-file-list>-->
 
     <filter>
         <filter-name>characterEncodingFilter</filter-name>
@@ -38,5 +24,20 @@
         <filter-name>characterEncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
+    <servlet>
+        <servlet-name>springServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:spring/spring-*.xml</param-value>
+        </init-param>
+        <!-- load-on-startup元素标记容器是否在启动的时候就加载这个servlet(实例化并调用其init()方法) -->
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>springServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
 
 </web-app>

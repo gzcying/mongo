@@ -34,7 +34,8 @@ public abstract class BaseDaoImpl<T extends Serializable,PK extends Serializable
      */
     public BaseDaoImpl() {
         //getClass() 返回表示此 Class 所表示的实体（类、接口、基本类型或 void）的超类的 Class。
-        this.entityClass = getSuperClassGenricType(this.getClass());
+
+        this.entityClass = getSuperClassGenricType(this.getClass(),0);
         this.collectionName = getDocumentAntotationValue(entityClass);
     }
 
@@ -55,8 +56,7 @@ public abstract class BaseDaoImpl<T extends Serializable,PK extends Serializable
      * p[0]（既：t.getActualTypeArguments()[0]）； 获取该数组的第一个值。因为我们知道在该例子中BaseDaoImpl<T>只有一个参数T。所以我们只需要获取第一个值就可以了。
      */
     @SuppressWarnings("unchecked")
-    private Class getSuperClassGenricType(final Class clazz) {
-        final int index = 0;
+    private  Class getSuperClassGenricType(final Class clazz,final int index ) {
         Type genType = clazz.getGenericSuperclass();
         if (genType instanceof ParameterizedType) {
             Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
