@@ -29,14 +29,14 @@
     </bean>
 
     <!-- 4自动扫描且只扫描@Controller -->
-    <context:component-scan base-package="com.lida.mongo.controller" />
+    <context:component-scan base-package="com.lida.mongo.controller"/>
 
     <!-- 定义无需Controller的url<->view直接映射 -->
-    <mvc:view-controller path="/" view-name="redirect:/"/>
+    <mvc:view-controller path="/" view-name="redirect:"/>
 
 
     <!-- 对静态资源文件的访问 不支持访问WEB-INF目录 -->
-    <mvc:default-servlet-handler />
+    <mvc:default-servlet-handler/>
 
     <!-- 对静态资源文件的访问 支持访问WEB-INF目录 -->
     <!-- <mvc:resources location="/uikit-2.3.1/" mapping="/uikit-2.3.1/**" /> -->
@@ -48,15 +48,13 @@
             </list>
         </property>
     </bean>
-    <!-- 输出对象转JSON支持 -->
-    <bean id="jsonConverter"
-          class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"></bean>
-    <bean
-            class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+    <!-- 输出对象转JSON支持 @ResponseBody-->
+    <bean id="jsonConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"></bean>
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
         <property name="messageConverters">
             <list>
                 <ref bean="stringConverter"/>
-                <ref bean="jsonConverter" />
+                <ref bean="jsonConverter"/>
             </list>
         </property>
     </bean>
